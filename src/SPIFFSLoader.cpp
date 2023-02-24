@@ -1,4 +1,4 @@
-#include "SPIFFSLoader.hpp"
+#include "loader/SPIFFSLoader.hpp"
 
 static const bool FORMAT_SPIFFS_IF_FAILED = true;
 

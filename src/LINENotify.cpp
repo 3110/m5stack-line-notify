@@ -14,7 +14,7 @@ const char* LINENotify::KEY_SSID = "ssid";
 const char* LINENotify::KEY_PASSWORD = "password";
 const char* LINENotify::KEY_TOKEN = "token";
 
-LINENotify::LINENotify(void) : _token{0}, _client() {
+LINENotify::LINENotify(void) : _ssid{0}, _password{0}, _token{0}, _client() {
 }
 
 LINENotify::~LINENotify(void) {

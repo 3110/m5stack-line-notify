@@ -34,10 +34,10 @@ ATOM シリーズ（S3 も含む）を対象としていますが，他の機種
 
 PlatformIO メニューから「Upload Filesystem Image」を選択するか，コマンドラインから`pio run --target uploadfs`を実行して設定ファイルを SPIFFS にアップロードし，設定を反映します。
 
-### 実装例：ボタンを押したら通知する
+### 実装例：ボタンを押すたびに押したことを通知する
 
 `examples/m5stack-line-notify-push/main.cpp`は，ボタンが押されるたびに押されたことを通知します。
 
-### 実装例：IP アドレスを通知する
+### 実装例：起動するたびに IP アドレスを通知する
 
 `examples/m5stack-line-notify-ip-address/main.cpp`は，起動するたびに自分の IP アドレスを通知します。

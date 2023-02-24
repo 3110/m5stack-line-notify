@@ -12,6 +12,7 @@ void setup(void) {
 
 void loop(void) {
     vTaskDelay(1);
+    notify.update();
     M5.update();
     if (M5.BtnA.wasClicked()) {
         if (!notify.send(NOTIFY_MESSAGE)) {

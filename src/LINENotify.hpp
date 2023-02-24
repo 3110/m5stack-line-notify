@@ -20,6 +20,7 @@ public:
     virtual ~LINENotify(void);
 
     virtual bool begin(const char* config = CONFIG_FILENAME);
+    virtual bool update(void);
     virtual bool send(const char* msg);
 
 protected:

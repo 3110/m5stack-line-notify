@@ -34,6 +34,17 @@ bool LINENotify::begin(const char* config) {
     return true;
 }
 
+bool LINENotify::update(void) {
+    if (WiFi.status() != WL_CONNECTED) {
+        ESP_LOGI(TAG, "WiFi disconnected. Reconnecting...");
+        WiFi.disconnect(true, true);
+        bool result = WiFi.reconnect();
+        ESP_LOGI(TAG, "%s", result ? "done." : "failed.");
+        return result;
+    }
+    return true;
+}
+
 bool LINENotify::parseConfig(const char* config) {
     SPIFFSLoader loader;
     if (!loader.begin()) {

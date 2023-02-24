@@ -5,9 +5,9 @@ M5Stack で LINE Notify を使用するためのライブラリです。Platform
 設定ファイル（JSON 形式，デフォルトは`line_notify.json`）を SPIFFS に置くことで，WiFi の接続情報や LINE Notify に必要なアクセス・トークンを切り替える仕組みも用意しています。
 
 - `SPIFFSLoader`クラス  
-  SPIFFS からファイルを読み出す
+  SPIFFS からファイルを読み込む
 - `ConfigParser`クラス  
-  設定ファイルを解析して値を取り出す
+  SPIFFS から設定ファイルを読み込んで値を取り出す
 - `LINENotify`クラス  
   LINE Notify の API に WiFi 経由で接続して通知する
 

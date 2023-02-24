@@ -1,0 +1,63 @@
+#include "SPIFFSLoader.hpp"
+
+static const bool FORMAT_SPIFFS_IF_FAILED = true;
+
+const char* SPIFFSLoader::TAG = "SPIFFSLoader";
+
+SPIFFSLoader::SPIFFSLoader(void) {
+}
+
+SPIFFSLoader::~SPIFFSLoader(void) {
+}
+
+bool SPIFFSLoader::begin(void) {
+    if (!SPIFFS.begin(FORMAT_SPIFFS_IF_FAILED)) {
+        ESP_LOGE(TAG, "Failed to mount SPIFFS");
+        return false;
+    }
+    return true;
+}
+
+bool SPIFFSLoader::exists(const char* path) {
+    if (path == nullptr) {
+        ESP_LOGE(TAG, "path is null");
+        return false;
+    }
+    return SPIFFS.exists(path);
+}
+
+bool SPIFFSLoader::readFile(const char* path, char* buf, size_t size) {
+    if (path == nullptr) {
+        ESP_LOGE(TAG, "path is null");
+        return false;
+    }
+    File f = SPIFFS.open(path, "r");
+    if (!f) {
+        ESP_LOGE(TAG, "Can't open file: %s", path);
+        return false;
+    }
+    size_t fileSize = f.size();
+    ESP_LOGD(TAG, "File Size: %d", fileSize);
+    if (fileSize > size) {
+        ESP_LOGE(TAG, "Exceed the buffer size %d < %d", size, fileSize);
+        f.close();
+        return false;
+    }
+    for (size_t p = 0; f.available() && p < size; ++p) {
+        buf[p] = f.read();
+    }
+    f.close();
+    return true;
+}
+
+bool SPIFFSLoader::removeFile(const char* path) {
+    if (path == nullptr) {
+        ESP_LOGE(TAG, "path is null");
+        return false;
+    }
+    if (!SPIFFS.remove(path)) {
+        ESP_LOGE(TAG, "Failed to remove %s", path);
+        return false;
+    }
+    return true;
+}

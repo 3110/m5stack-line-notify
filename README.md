@@ -36,7 +36,7 @@ PlatformIO メニューから「Upload Filesystem Image」を選択するか，�
 
 ### 実装例：ボタンを押したら通知する
 
-`examples/m5stack-line-notify-push/main.cpp`は，ボタンを押したら LINE Notify で押されたことを通知します。
+`examples/m5stack-line-notify-push/main.cpp`は，ボタンが押されるたびに押されたことを通知します。
 
 ### 実装例：IP アドレスを通知する
 

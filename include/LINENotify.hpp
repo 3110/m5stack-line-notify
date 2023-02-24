@@ -21,6 +21,9 @@ public:
 protected:
     virtual bool connectWiFi(const char* ssid, const char* password,
                              unsigned long timeout);
+    virtual HTTPClient& getClient(void) {
+        return this->_client;
+    }
 
 private:
     HTTPClient _client;

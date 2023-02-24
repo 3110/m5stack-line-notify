@@ -14,7 +14,7 @@ WiFi の接続情報や LINE Notify に必要なアクセス・トークンを�
 
 ## 実装例
 
-`examples/m5stack-line-notify-sample/main.cpp`は，設定ファイル（JSON 形式，デフォルトは`line_notify.json`）を SPIFFS に置くことで，WiFi の接続情報や LINE Notify に必要なアクセス・トークンを切り替えられるようにした例です。
+いずれの実装例も 設定ファイル（JSON 形式，デフォルトは`line_notify.json`）を SPIFFS に置くことで，WiFi の接続情報や LINE Notify に必要なアクセス・トークンを切り替えられます。
 
 ATOM シリーズ（S3 も含む）を対象としていますが，他の機種でも`platformio.ini`に設定を追加すれば使えるはずです。
 
@@ -33,3 +33,11 @@ ATOM シリーズ（S3 も含む）を対象としていますが，他の機種
 ※ここで指定するパーソナル・アクセス・トークンは[LINE Notify のマイページ](https://notify-bot.line.me/my/)から発行できます。
 
 PlatformIO メニューから「Upload Filesystem Image」を選択するか，コマンドラインから`pio run --target uploadfs`を実行して設定ファイルを SPIFFS にアップロードし，設定を反映します。
+
+### 実装例：ボタンを押したら通知する
+
+`examples/m5stack-line-notify-push/main.cpp`は，ボタンを押したら LINE Notify で押されたことを通知します。
+
+### 実装例：IP アドレスを通知する
+
+`examples/m5stack-line-notify-ip-address/main.cpp`は，起動するたびに自分の IP アドレスを通知します。

@@ -1,6 +1,8 @@
 # M5Stack 用 LINE Notify ライブラリ
 
-M5Stack で LINE Notify を使用するためのライブラリです。設定ファイル（JSON）を SPIFFS に置くことで，WiFi の接続情報や LINE Notify に必要なアクセス・トークンを切り替える仕組みも用意しています。
+M5Stack で LINE Notify を使用するためのライブラリです。PlatformIO IDE 環境での使用を想定しています。
+
+設定ファイル（JSON）を SPIFFS に置くことで，WiFi の接続情報や LINE Notify に必要なアクセス・トークンを切り替える仕組みも用意しています。
 
 - `SPIFFSLoader`クラス  
   SPIFFS からファイルを読み出す
@@ -27,4 +29,4 @@ M5Stack で LINE Notify を使用するためのライブラリです。設定�
 
 ## 実装例
 
-`examples/m5stack-line-notify-sample`を参照してください。
+`examples/m5stack-line-notify-sample/main.cpp`を参照してください。

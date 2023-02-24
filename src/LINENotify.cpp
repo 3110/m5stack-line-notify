@@ -5,7 +5,7 @@
 const char* LINENotify::TAG = "LINENotify";
 const char* LINENotify::NOTIFY_URL = "https://notify-api.line.me/api/notify";
 
-LINENotify::LINENotify(void) : _client() {
+LINENotify::LINENotify(void) : _token{0}, _client() {
     this->_client.setReuse(false);
 }
 
@@ -36,6 +36,16 @@ bool LINENotify::update(void) {
     return true;
 }
 
+bool LINENotify::setToken(const char* token) {
+    if (token == nullptr) {
+        memset(this->_token, 0, sizeof(this->_token));
+        return false;
+    } else {
+        snprintf(this->_token, sizeof(this->_token), "%s", token);
+        return true;
+    }
+}
+
 bool LINENotify::connectWiFi(const char* ssid, const char* password,
                              unsigned long timeout) {
     WiFi.disconnect(true, true);
@@ -59,9 +69,9 @@ bool LINENotify::connectWiFi(const char* ssid, const char* password,
     }
 }
 
-bool LINENotify::send(const char* token, const char* msg) {
-    if (token == nullptr) {
-        ESP_LOGE(TAG, "token is null");
+bool LINENotify::send(const char* msg) {
+    if (strlen(this->_token) == 0) {
+        ESP_LOGE(TAG, "token is not set");
         return false;
     }
     if (msg == nullptr) {
@@ -70,7 +80,7 @@ bool LINENotify::send(const char* token, const char* msg) {
     }
 
     this->_client.begin(NOTIFY_URL);
-    this->_client.addHeader("Authorization", "Bearer " + String(token));
+    this->_client.addHeader("Authorization", "Bearer " + String(this->_token));
     this->_client.addHeader("Content-Type",
                             "application/x-www-form-urlencoded");
     this->_client.POST("message=" + String(msg));

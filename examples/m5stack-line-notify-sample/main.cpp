@@ -5,11 +5,11 @@
 
 const char* NOTIFY_MESSAGE = "押された！";
 
-ConfigParser parser;
 LINENotify notify;
 
 void setup(void) {
     M5.begin();
+    ConfigParser parser;
     if (!parser.parse()) {
         ESP_LOGE("main", "Failed to parse config file");
         while (true) {
@@ -17,6 +17,7 @@ void setup(void) {
         }
     }
     notify.begin(parser.getSSID(), parser.getPassword());
+    notify.setToken(parser.getToken());
 }
 
 void loop(void) {
@@ -24,7 +25,7 @@ void loop(void) {
     notify.update();
     M5.update();
     if (M5.BtnA.wasClicked()) {
-        if (!notify.send(parser.getToken(), NOTIFY_MESSAGE)) {
+        if (!notify.send(NOTIFY_MESSAGE)) {
             ESP_LOGE("main", "Failed to send notify: %s", NOTIFY_MESSAGE);
         }
     }

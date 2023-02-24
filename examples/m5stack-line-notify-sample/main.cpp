@@ -14,6 +14,8 @@ void loop(void) {
     vTaskDelay(1);
     M5.update();
     if (M5.BtnA.wasClicked()) {
-        notify.send(NOTIFY_MESSAGE);
+        if (!notify.send(NOTIFY_MESSAGE)) {
+            ESP_LOGE("main", "Failed to send notify: %s", NOTIFY_MESSAGE);
+        }
     }
 }

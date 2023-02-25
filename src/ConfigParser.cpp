@@ -8,6 +8,11 @@ ConfigParser::ConfigParser(void) : _loader() {
 ConfigParser::~ConfigParser(void) {
 }
 
+bool ConfigParser::parse(const char* config) {
+    JSONVar o;
+    return parse(config, o);
+}
+
 const char* ConfigParser::getTag(void) const {
     return "ConfigParser";
 }

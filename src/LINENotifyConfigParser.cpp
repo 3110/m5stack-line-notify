@@ -11,7 +11,24 @@ LINENotifyConfigParser::~LINENotifyConfigParser(void) {
 }
 
 bool LINENotifyConfigParser::parse(const char* config) {
-    JSONVar o;
+    return ConfigParser::parse(config);
+}
+
+const char* const LINENotifyConfigParser::getSSID(void) const {
+    return this->_ssid;
+}
+const char* const LINENotifyConfigParser::getPassword(void) const {
+    return this->_password;
+}
+const char* const LINENotifyConfigParser::getToken(void) const {
+    return this->_token;
+}
+
+const char* LINENotifyConfigParser::getTag(void) const {
+    return "LINENotifyConfigParser";
+}
+
+bool LINENotifyConfigParser::parse(const char* config, JSONVar& o) {
     if (!ConfigParser::parse(config, o)) {
         return false;
     }
@@ -31,22 +48,4 @@ bool LINENotifyConfigParser::parse(const char* config) {
     ESP_LOGD(getTag(), "Password: %s", this->_password);
     ESP_LOGD(getTag(), "Token: %s", this->_token);
     return true;
-}
-
-const char* const LINENotifyConfigParser::getSSID(void) const {
-    return this->_ssid;
-}
-const char* const LINENotifyConfigParser::getPassword(void) const {
-    return this->_password;
-}
-const char* const LINENotifyConfigParser::getToken(void) const {
-    return this->_token;
-}
-
-const char* LINENotifyConfigParser::getTag(void) const {
-    return "LINENotifyConfigParser";
-}
-
-bool LINENotifyConfigParser::parse(const char* config, JSONVar& o) {
-    return ConfigParser::parse(config, o);
 }

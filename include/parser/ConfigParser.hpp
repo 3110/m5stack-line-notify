@@ -9,7 +9,7 @@ public:
     ConfigParser(void);
     virtual ~ConfigParser(void);
 
-    virtual bool parse(const char* config) = 0;
+    virtual bool parse(const char* config);
 
 protected:
     virtual const char* getTag(void) const;

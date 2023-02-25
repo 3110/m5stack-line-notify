@@ -34,7 +34,7 @@ ATOM シリーズ（S3 も含む）を対象としていますが，他の機種
 
 ※ここで指定するパーソナル・アクセス・トークンは[LINE Notify のマイページ](https://notify-bot.line.me/my/)から発行できます。
 
-PlatformIO メニューから「Upload Filesystem Image」を選択するか，コマンドラインから`pio run --target uploadfs`を実行して設定ファイルを SPIFFS にアップロードし，設定を反映します。
+ファームウェアを書き込んだ後，PlatformIO メニューから「Upload Filesystem Image」を選択するか，コマンドラインから`pio run --target uploadfs`を実行して設定ファイルを SPIFFS にアップロードし，設定を反映します。
 
 ### 実装例：ボタンを押すたびに押したことを通知する
 

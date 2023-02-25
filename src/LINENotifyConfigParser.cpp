@@ -46,3 +46,7 @@ const char* const LINENotifyConfigParser::getToken(void) const {
 const char* LINENotifyConfigParser::getTag(void) const {
     return "LINENotifyConfigParser";
 }
+
+bool LINENotifyConfigParser::parse(const char* config, JSONVar& o) {
+    return ConfigParser::parse(config, o);
+}

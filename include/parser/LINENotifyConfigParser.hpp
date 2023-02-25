@@ -19,6 +19,7 @@ public:
 
 protected:
     virtual const char* getTag(void) const;
+    virtual bool parse(const char* config, JSONVar& o);
 
 private:
     static const char* KEY_SSID;

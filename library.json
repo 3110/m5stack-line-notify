@@ -1,0 +1,31 @@
+{
+  "name": "LINE Notify Library for M5Stack",
+  "description": "LINE Notify Library for M5Stack",
+  "keywords": "LINE Notify,M5Stack",
+  "authors": {
+    "name": "SAITO, Tetsuya",
+    "email": "saito.tetsuya+github@gmail.com",
+    "url": "https://github.com/3110/m5stack-line-notify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/3110/"
+  },
+  "version": "0.0.1",
+  "license": "MIT",
+  "frameworks": "arduino",
+  "platforms": "espressif32",
+  "headers": [
+    "LINENotify.hpp",
+    "parser/LINENotifyConfigParser.hpp",
+    "parser/ConfigParser.h",
+    "loader/SPIFFSLoader.hpp"
+  ],
+  "dependencies": {
+    "M5Unified": "*",
+    "Arduino_JSON": "*"
+  },
+  "build": {
+    "srcFilter": ["+<*.cpp>", "+<*.hpp>"]
+  }
+}

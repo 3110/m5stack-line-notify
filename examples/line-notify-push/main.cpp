@@ -1,7 +1,9 @@
 #include <M5Unified.hpp>
 
 #include "LINENotify.hpp"
-#include "parser/ConfigParser.hpp"
+#include "parser/LINENotifyConfigParser.hpp"
+
+const char* CONFIG_FILE = "/line_notify.json";
 
 const char* NOTIFY_MESSAGE = "押された！";
 
@@ -9,11 +11,11 @@ LINENotify notify;
 
 void setup(void) {
     M5.begin();
-    ConfigParser parser;
-    if (!parser.parse()) {
+    LINENotifyConfigParser parser;
+    if (!parser.parse(CONFIG_FILE)) {
         ESP_LOGE("main", "Failed to parse config file");
         while (true) {
-            vTaskDelay(100);
+            delay(100);
         }
     }
     notify.begin(parser.getSSID(), parser.getPassword());
@@ -21,7 +23,6 @@ void setup(void) {
 }
 
 void loop(void) {
-    vTaskDelay(1);
     notify.update();
     M5.update();
     if (M5.BtnA.wasClicked()) {
@@ -29,4 +30,5 @@ void loop(void) {
             ESP_LOGE("main", "Failed to send notify: %s", NOTIFY_MESSAGE);
         }
     }
+    delay(100);
 }

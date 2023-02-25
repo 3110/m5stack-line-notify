@@ -1,17 +1,19 @@
 #include <M5Unified.h>
 
 #include "LINENotify.hpp"
-#include "parser/ConfigParser.hpp"
+#include "parser/LINENotifyConfigParser.hpp"
+
+const char* CONFIG_FILE = "/line_notify.json";
 
 LINENotify notify;
 
 void setup(void) {
     M5.begin();
-    ConfigParser parser;
-    if (!parser.parse()) {
+    LINENotifyConfigParser parser;
+    if (!parser.parse(CONFIG_FILE)) {
         ESP_LOGE("main", "Failed to parse config file");
         while (true) {
-            vTaskDelay(100);
+            delay(100);
         }
     }
     notify.begin(parser.getSSID(), parser.getPassword());
@@ -20,7 +22,7 @@ void setup(void) {
 }
 
 void loop(void) {
-    vTaskDelay(1);
     M5.update();
     notify.update();
+    delay(100);
 }

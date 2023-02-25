@@ -26,6 +26,21 @@ bool SPIFFSLoader::exists(const char* path) {
     return SPIFFS.exists(path);
 }
 
+size_t SPIFFSLoader::size(const char* path) const {
+    if (path == nullptr) {
+        ESP_LOGE(TAG, "path is null");
+        return 0;
+    }
+    File f = SPIFFS.open(path, "r");
+    if (!f) {
+        ESP_LOGE(TAG, "Can't open file: %s", path);
+        return 0;
+    }
+    const size_t s = f.size();
+    f.close();
+    return s;
+}
+
 bool SPIFFSLoader::readFile(const char* path, char* buf, size_t size) {
     if (path == nullptr) {
         ESP_LOGE(TAG, "path is null");

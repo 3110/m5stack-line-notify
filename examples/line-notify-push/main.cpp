@@ -18,6 +18,8 @@ void setup(void) {
             delay(100);
         }
     }
+    ESP_LOGD("main", "SSID: %s", parser.getSSID());
+    ESP_LOGD("main", "Password: %s", parser.getPassword());
     notify.begin(parser.getSSID(), parser.getPassword());
     notify.setToken(parser.getToken());
 }

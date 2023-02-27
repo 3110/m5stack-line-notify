@@ -62,7 +62,8 @@ bool LINENotify::connectWiFi(const char* ssid, const char* password,
         }
     }
     if (WiFi.status() == WL_CONNECTED) {
-        ESP_LOGI(TAG, "Connected: IP address %s", WiFi.localIP().toString());
+        ESP_LOGI(TAG, "Connected: IP address %s",
+                 WiFi.localIP().toString().c_str());
         return true;
     } else {
         return false;

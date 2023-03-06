@@ -58,9 +58,7 @@ bool SPIFFSLoader::readFile(const char* path, char* buf, size_t size) {
         f.close();
         return false;
     }
-    for (size_t p = 0; f.available() && p < size; ++p) {
-        buf[p] = f.read();
-    }
+    f.read((uint8_t*)buf, size);
     f.close();
     return true;
 }

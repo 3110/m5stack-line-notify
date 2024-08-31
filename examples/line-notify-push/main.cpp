@@ -4,22 +4,27 @@
 #include "parser/LINENotifyConfigParser.hpp"
 
 const char* CONFIG_FILE = "/line_notify.json";
-
-const char* NOTIFY_MESSAGE = "押された！";
+const char* DEFAULT_NOTIFY_MESSAGE = "押された！";
+const char* TAG = "LineNotifyPush";
 
 LINENotify notify;
+LINENotifyConfigParser parser;
 
 void setup(void) {
     M5.begin();
-    LINENotifyConfigParser parser;
     if (!parser.parse(CONFIG_FILE)) {
-        ESP_LOGE("main", "Failed to parse config file");
+        ESP_LOGE(TAG, "Failed to parse config file");
         while (true) {
             delay(100);
         }
     }
-    ESP_LOGD("main", "SSID: %s", parser.getSSID());
-    ESP_LOGD("main", "Password: %s", parser.getPassword());
+    ESP_LOGD(TAG, "SSID: %s", parser.getSSID());
+    ESP_LOGD(TAG, "Password: %s", parser.getPassword());
+    if (parser.hasMessage()) {
+        ESP_LOGD(TAG, "Message: %s", parser.getMessage());
+    } else {
+        ESP_LOGD(TAG, "Message: %s", DEFAULT_NOTIFY_MESSAGE);
+    }
     notify.begin(parser.getSSID(), parser.getPassword());
     notify.setToken(parser.getToken());
 }
@@ -28,8 +33,9 @@ void loop(void) {
     notify.update();
     M5.update();
     if (M5.BtnA.wasClicked()) {
-        if (!notify.send(NOTIFY_MESSAGE)) {
-            ESP_LOGE("main", "Failed to send notify: %s", NOTIFY_MESSAGE);
+        if (!notify.send(parser.hasMessage() ? parser.getMessage()
+                                             : DEFAULT_NOTIFY_MESSAGE)) {
+            ESP_LOGE(TAG, "Failed to send notify");
         }
     }
     delay(100);

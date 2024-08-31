@@ -4,20 +4,21 @@
 #include "parser/LINENotifyConfigParser.hpp"
 
 const char* CONFIG_FILE = "/line_notify.json";
+const char* TAG = "LineNotifyIPAddress";
 
 LINENotify notify;
+LINENotifyConfigParser parser;
 
 void setup(void) {
     M5.begin();
-    LINENotifyConfigParser parser;
     if (!parser.parse(CONFIG_FILE)) {
-        ESP_LOGE("main", "Failed to parse config file");
+        ESP_LOGE(TAG, "Failed to parse config file");
         while (true) {
             delay(100);
         }
     }
-    ESP_LOGD("main", "SSID: %s", parser.getSSID());
-    ESP_LOGD("main", "Password: %s", parser.getPassword());
+    ESP_LOGD(TAG, "SSID: %s", parser.getSSID());
+    ESP_LOGD(TAG, "Password: %s", parser.getPassword());
     notify.begin(parser.getSSID(), parser.getPassword());
     notify.setToken(parser.getToken());
     notify.send(WiFi.localIP().toString().c_str());

@@ -28,11 +28,14 @@ ATOM シリーズ（S3 も含む）を対象としていますが，他の機種
 {
   "ssid": "[SSID]",
   "password": "[パスワード]",
-  "token": "[LINE Notifyのパーソナル・アクセス・トークン]"
+  "token": "[LINE Notifyのパーソナル・アクセス・トークン]",
+  "message": "[LINE Notifyで通知するメッセージ]"
 }
 ```
 
-※ここで指定するパーソナル・アクセス・トークンは[LINE Notify のマイページ](https://notify-bot.line.me/my/)から発行できます。
+ここで指定するパーソナル・アクセス・トークンは[LINE Notify のマイページ](https://notify-bot.line.me/my/)から発行できます。
+
+`message`には UTF-8 で約 48 文字までのメッセージを指定できます。変更したい場合は`LINENotifyConfigParser`クラスの`MAX_MESSAGE_LEN`を変更してください。
 
 ファームウェアを書き込んだ後，PlatformIO メニューから「Upload Filesystem Image」を選択するか，コマンドラインから`pio run --target uploadfs`を実行して設定ファイルを SPIFFS にアップロードし，設定を反映します。
 
